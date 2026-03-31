@@ -1,7 +1,7 @@
 using UnityEngine;
 using SFB; // Importante: Esta es la librería que acabas de instalar
 
-public class SelectorDeArchivos : MonoBehaviour
+public class SelectFiles : MonoBehaviour
 {
     public void AbrirExplorador()
     {
@@ -11,7 +11,15 @@ public class SelectorDeArchivos : MonoBehaviour
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
         {
             Debug.Log("Ruta detectada: " + paths[0]);
-            // Aquí es donde llamaremos a la función para cargar la imagen
+            
         }
+    }
+
+    public void SelectCSV(){
+        var paths = StandaloneFileBrowser.OpenFilePanel("Seleccionar csv", "", "csv", true);
+        foreach (var path in paths){
+            Debug.Log("Archivo seleccionado: " + path);
+        }
+        
     }
 }
