@@ -1,5 +1,6 @@
 using UnityEngine;
-using SFB; // Importante: Esta es la librería que acabas de instalar
+using SFB;
+using System.IO; // Importante: Esta es la librería que acabas de instalar
 
 public class SelectFiles : MonoBehaviour
 {
@@ -15,10 +16,16 @@ public class SelectFiles : MonoBehaviour
         }
     }
 
-    public void SelectCSV(){
-        var paths = StandaloneFileBrowser.OpenFilePanel("Seleccionar csv", "", "csv", true);
-        foreach (var path in paths){
+    public void SelectTIF() {
+        var paths = StandaloneFileBrowser.OpenFilePanel("Seleccionar csv", "", "tif", true);
+        foreach (var path in paths)
+        {
             Debug.Log("Archivo seleccionado: " + path);
+            //Verificar la integridad
+            byte[] bytes = File.ReadAllBytes(path);
+            APIRequest.Instance.PostTif(bytes);
+            //Procesar raster a dem
+
         }
         
     }
